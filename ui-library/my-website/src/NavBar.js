@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -19,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+const routeToStudentForm = () => {
+	console.log()
+}
+
 export default function NavBar() {
 	const classes = useStyles();
 	return (
@@ -28,10 +33,12 @@ export default function NavBar() {
 					<IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
 						<MenuIcon />
 					</IconButton>
+					
 					<Typography variant="h6" className={classes.title}>
-						YOUR_NAME
+					<Link to="/">Home</Link>
 					</Typography>
-					<Button color="inherit">Login</Button>
+					
+					<Link to="/student-form"><Button color="inherit" color="secondary">Student Form</Button></Link>
 				</Toolbar>
 			</AppBar>
 		</div>
