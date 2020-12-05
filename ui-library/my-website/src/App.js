@@ -9,9 +9,7 @@ function App() {
 	return (
 		<>
 		<Router>
-		<Link to="/student-form">Student Form</Link>
 			<div>
-				hello my name is rakesh
 				<NavBar></NavBar>
 			</div>
 			<Switch>
@@ -31,9 +29,6 @@ function App() {
 				</Route>
 			</Switch>
 		</Router>
-		<div>
-			hello my name is rakesh
-		</div>
 		</>
 	);
 }
