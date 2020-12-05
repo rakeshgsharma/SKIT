@@ -7,10 +7,18 @@ function Student(props) {
 		<Card style={{ padding: "20px", margin: "20px" }} variant="outlined">
 			<CardContent style={{ textAlign: "center" }}>
 				<Typography color="textSecondary">Name:</Typography>
-				<Typography variant="h3">{props.name}</Typography>
-				<Typography color="textSecondary">Stream:</Typography>
-				<Typography variant="h3">{props.stream}</Typography>
+				<Typography variant="h3">{props.user.name}</Typography>
+				<Typography color="textSecondary">Address:</Typography>
+				<Typography variant="h3">{props.user.address.street}</Typography>
 			</CardContent>
+			<Grid container xs={6} direction="row" justify="center" alignItems="center">
+				<Grid item>
+					<Typography variant="h3">{props.user.address.geo.lat}</Typography>
+				</Grid>
+				<Grid item>
+					<Typography variant="h3">{props.user.address.geo.long}</Typography>
+				</Grid>
+			</Grid>
 			<Grid container direction="row" justify="center" alignItems="center">
 				<CardActions>
 					<Link to={props.name}>
