@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 export default function() {
     const classes = useStyles();
 
-    const fruitsArray = ['Apples', 'Bananas', 'Grapes', 'Guavas', 'Oranges']; // information usually comes from the server(backend)
+    const fruitsArray=['Apples', 'Bananas', 'Grapes', 'Guavas', 'Oranges']; // information usually comes from the server(backend)
 
     const [fruits, setFruits] = useState(fruitsArray[3]);
 
