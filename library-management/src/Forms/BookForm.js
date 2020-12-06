@@ -1,18 +1,48 @@
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Axios from "axios";
 
-function BookForm() {
-  let [bookObject, setBookObject] = useState({});
+function BookForm(props) {
+  let [bookObject, setBookObject] = useState({
+    title: '',
+    author: '',
+    description: ''
+  });
 
   const updateDetails = (event) => {
     setBookObject({ ...bookObject, [event.target.id]: event.target.value });
   };
 
+  const resetForm = (response) => {
+    props.setIsEdit(false);
+    props.setUpdatedBook(response.data);
+    setBookObject({
+      title: '',
+      author: '',
+      description: ''
+    });
+  }
+
   const saveBook = () => {
-    Axios.post("http://localhost:3000/books", bookObject);
+    if(props.isEdit) {
+      Axios.put("http://localhost:8000/books/" + bookObject.id, bookObject)
+      .then((response) => {
+        console.log('PUT CALL IS SUCCESSFUL', response);
+        resetForm(response);
+      });
+    } else  {
+      Axios.post("http://localhost:8000/books", bookObject)
+        .then((response) => {
+          console.log('POST CALL IS SUCCESSFUL', response);
+          resetForm(response);
+        })
+    }
   };
+
+  useEffect(() => {
+    setBookObject(props.editBook);
+  }, [props.editBook]);
 
   return (
     <div style={{ padding: "20px", margin: "20px" }}>
@@ -20,18 +50,21 @@ function BookForm() {
         id="title"
         label="Book Title"
         variant="outlined"
+        value={bookObject.title}
         onChange={updateDetails}
       />
       <TextField
         id="author"
         label="Book Author"
         variant="outlined"
+        value={bookObject.author}
         onChange={updateDetails}
       />
       <TextField
         id="description"
         label="Book Description"
         variant="outlined"
+        value={bookObject.description}
         onChange={updateDetails}
       />
       <Button onClick={saveBook} variant="outlined">Save Book</Button>

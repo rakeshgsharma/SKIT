@@ -8,12 +8,12 @@ import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 
-function Books() {
+function Books(props) {
   const [books, setBooks] = useState([]);
   
   
   useEffect(() => {
-      Axios.get("http://localhost:3000/books")
+      Axios.get("http://localhost:8000/books")
         .then((res) => {
           setBooks(res.data);
           
@@ -21,16 +21,28 @@ function Books() {
         .catch((err) => {
           console.log(err);
         });
+  } , [props.updatedBook]);
 
-} , [])
+  const makeEdit = (book) => {
+    props.editBookData(book);
+    props.setIsEdit(true);
+  }
 
-console.log(books);
+  const deleteBook = (id) =>  {
+    Axios.delete("http://localhost:8000/books/" + id)
+      .then((response) => {
+        console.log('DELETE CALL IS SUCCESSFUL', response);
+        const afterDeletionBooks = books.filter((book) => book.id !== id);
+        setBooks(afterDeletionBooks);
+      });
+  }
+
+  console.log(books);
 
   return (
     <div>
-        
       {books.map((book) => {
-         return(<Card>
+         return(<Card key={book.id}>
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
               {book.id}
@@ -48,6 +60,14 @@ console.log(books);
                   View Book Details
               </Button>
               </Link>
+          </CardActions>
+          <CardActions>
+              <Button onClick={() => makeEdit(book)} variant="outlined" color="primary">
+                  EDIT
+              </Button>
+              <Button onClick={() => deleteBook(book.id)} variant="outlined" color="primary">
+                  DELETE
+              </Button>
           </CardActions>
         </Card>)
       })}
