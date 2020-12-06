@@ -1,0 +1,34 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "DBMS Concepts",
+      "author": "A",
+      "description": "something"
+    },
+    {
+      "id": 2,
+      "title": "Automata Theory",
+      "author": "B",
+      "description": "something"
+    },
+    {
+      "id": 3,
+      "title": "Design and Analysis of Algo",
+      "author": "C",
+      "description": "something"
+    },
+    {
+      "id": 4,
+      "title": "Integral Calculas",
+      "author": "D",
+      "description": "something"
+    },
+    {
+      "title": "Harry Potter",
+      "author": "JK Rowling",
+      "description": "Fantasy Book",
+      "id": 5
+    }
+  ]
+}
